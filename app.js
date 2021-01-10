@@ -47,7 +47,10 @@ const cardArray =[
 
 
 const grid = document.querySelector (".grid");
-cardChoosen=[]
+let cardChosen=[];
+let cardChosenId=[];
+let cardWon= [];
+
 
 //CREATE A BOARD
 
@@ -60,17 +63,45 @@ cardChoosen=[]
          grid.appendChild(card)// add Card into Div
      }
  }
+//CHECK THE MATCH
+
+function checkForMatch(){
+    let cards = document.querySelectorAll ("img")
+    const optionOneId = cardChosenId [0]
+    const optionTwoId = cardChosenId [1]
+    if(cardChoosen[0]===cardChosen[1]){
+         alert("you found a match")
+         cards[optionOneId].setAttribute("src", "images/white.png")
+         cards[optionTwoId].setAttribute("src", "images/white.png")
+         cardWon.push(cardChosen)
+    } else {
+        cards[optionOneId].setAttribute("src", "images/blank.png")
+        cards[optionTwoId].setAttribute("src", "images/blank.png")
+        alert ("sorry,try it again")
+
+    }
+    cardChosen=[];
+    cardChoseId=[];
+   resultDispaly
+
+}
+
+
 
  //FLIP THE CARD
  function flipCard (){
-     //CREATE AN EMPITY ARRAY OF CARD CHOOSEN 
-     let carId = this.getAttribute("data-id")
-     cardChoosen.push(cardArray[cardId].name)
+     //CREATE AN EMPITY ARRAY OF CARD CHOSEN 
+     let cardId = this.getAttribute("data-id")
+     cardChosen.push(cardArray[cardId].name)
+     cardChosenId.push(cardId)
+     this.setAttribute("src", cardArray[cardId].img)
+     if (cardChosen.length === 2){
+         setTimeout (checkForMatch,500)
+     }
+
  }
  
  
- 
- //CHECK THE MATCH
 
 
  createBoard()
