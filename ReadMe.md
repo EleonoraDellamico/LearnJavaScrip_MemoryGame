@@ -7,4 +7,4 @@
 6. appenChild()
 7. Math.random()
 8. sort()
-9. For looos
+9. For loops
